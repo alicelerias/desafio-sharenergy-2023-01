@@ -10,6 +10,7 @@ import (
 	"strings"
 
 	"github.com/alicelerias/desafio-sharenergy-2023-01/config"
+	"github.com/alicelerias/desafio-sharenergy-2023-01/models"
 	"github.com/gin-gonic/gin"
 )
 
@@ -17,7 +18,6 @@ func main() {
 
 	r := gin.Default()
 	configs := config.GetConfig()
-
 	r.Use(CORSMiddleware())
 
 	r.GET("/heathcheck", func(c *gin.Context) {
@@ -40,7 +40,7 @@ func main() {
 		ctx.AbortWithStatus(http.StatusOK)
 	})
 
-	r.Use(AuthenticationMiddleware())
+	// r.Use(AuthenticationMiddleware())
 
 	r.GET("/users", func(ctx *gin.Context) {
 		// http call to ramdomusers.com
@@ -73,7 +73,7 @@ func main() {
 
 		if search, ok := ctx.GetQuery("search"); ok {
 			search = strings.ToLower(search)
-			var r result
+			var r models.Result
 
 			body, err := ioutil.ReadAll(res.Body)
 			if err != nil {
@@ -85,8 +85,8 @@ func main() {
 				panic("err")
 			}
 
-			newResult := result{
-				Results: []user{},
+			newResult := models.Result{
+				Results: []models.User{},
 			}
 
 			for _, user := range r.Results {
