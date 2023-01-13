@@ -7,9 +7,10 @@ import (
 )
 
 type Config struct {
-	AuthCookie string
-	Host       string
-	LoginPage  string
+	AuthCookie    string
+	Host          string
+	LoginPage     string
+	ApiRandomUser string
 }
 
 var config *Config
@@ -19,9 +20,10 @@ func GetConfig() *Config {
 		godotenv.Load()
 
 		config = &Config{
-			AuthCookie: os.Getenv("AUTH_COOKIE"),
-			Host:       os.Getenv("HOST"),
-			LoginPage:  os.Getenv("LOGIN_PAGE"),
+			AuthCookie:    os.Getenv("AUTH_COOKIE"),
+			Host:          os.Getenv("HOST"),
+			LoginPage:     os.Getenv("LOGIN_PAGE"),
+			ApiRandomUser: os.Getenv("API_RANDOM_USER"),
 		}
 	}
 

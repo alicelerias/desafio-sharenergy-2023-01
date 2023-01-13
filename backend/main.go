@@ -1,7 +1,13 @@
 package main
 
 import (
+	"encoding/json"
+	"fmt"
+	"io"
+	"io/ioutil"
+	"log"
 	"net/http"
+	"strings"
 
 	"github.com/alicelerias/desafio-sharenergy-2023-01/config"
 	"github.com/gin-gonic/gin"
@@ -38,7 +44,64 @@ func main() {
 
 	r.GET("/users", func(ctx *gin.Context) {
 		// http call to ramdomusers.com
-		//return
+
+		req, err := http.NewRequest("GET", configs.ApiRandomUser, nil)
+		if err != nil {
+			log.Fatal((err))
+		}
+		query := req.URL.Query()
+		query.Add("seed", "a")
+
+		if value, ok := ctx.GetQuery("page"); ok {
+			query.Add("page", value)
+		} else {
+			query.Add("page", "1")
+		}
+
+		if value, ok := ctx.GetQuery("results"); ok {
+			query.Add("results", value)
+		} else {
+			query.Add("results", "10")
+		}
+
+		req.URL.RawQuery = query.Encode()
+
+		res, err := http.DefaultClient.Do(req)
+		if err != nil {
+			panic("request fail")
+		}
+
+		if search, ok := ctx.GetQuery("search"); ok {
+			search = strings.ToLower(search)
+			var r result
+
+			body, err := ioutil.ReadAll(res.Body)
+			if err != nil {
+				panic("err")
+			}
+
+			err = json.Unmarshal(body, &r)
+			if err != nil {
+				panic("err")
+			}
+
+			newResult := result{
+				Results: []user{},
+			}
+
+			for _, user := range r.Results {
+				if strings.ToLower(user.Name.First) == search || user.Name.Last == search || user.Email == search || user.Login.UserName == search {
+					newResult.Results = append(newResult.Results, user)
+				}
+			}
+			fmt.Println(newResult)
+			ctx.JSON(http.StatusOK, newResult)
+		} else {
+			io.Copy(ctx.Writer, res.Body)
+			ctx.Status(http.StatusOK)
+			ctx.Writer.CloseNotify()
+		}
+
 	})
 
 	r.Run()
