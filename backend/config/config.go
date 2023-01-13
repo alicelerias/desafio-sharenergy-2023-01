@@ -12,6 +12,7 @@ type Config struct {
 	LoginPage     string
 	ApiRandomUser string
 	ApiHttpCat    string
+	ApiRandomDog  string
 }
 
 var config *Config
@@ -26,6 +27,7 @@ func GetConfig() *Config {
 			LoginPage:     os.Getenv("LOGIN_PAGE"),
 			ApiRandomUser: os.Getenv("API_RANDOM_USER"),
 			ApiHttpCat:    os.Getenv("API_HTTP_CAT"),
+			ApiRandomDog:  os.Getenv("API_RANDOM_DOG"),
 		}
 	}
 

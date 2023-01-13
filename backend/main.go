@@ -59,6 +59,21 @@ func main() {
 		ctx.Writer.CloseNotify()
 	})
 
+	r.GET("/dogs", func(ctx *gin.Context) {
+		var dog string = "woof.json"
+
+		url := fmt.Sprintf("%s/%s", configs.ApiRandomDog, dog)
+		res, err := http.Get(url)
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		io.Copy(ctx.Writer, res.Body)
+		ctx.Status(http.StatusOK)
+		ctx.Writer.CloseNotify()
+
+	})
+
 	r.GET("/users", func(ctx *gin.Context) {
 		// http call to ramdomusers.com
 
