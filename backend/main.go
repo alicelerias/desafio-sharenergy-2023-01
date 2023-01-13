@@ -40,14 +40,31 @@ func main() {
 		ctx.AbortWithStatus(http.StatusOK)
 	})
 
-	// r.Use(AuthenticationMiddleware())
+	r.Use(AuthenticationMiddleware())
+
+	r.GET("/cats", func(ctx *gin.Context) {
+		code, ok := ctx.GetQuery("code")
+		if !ok {
+			panic("request fail")
+		}
+
+		url := fmt.Sprintf("%s/%s", configs.ApiHttpCat, code)
+		res, err := http.Get(url)
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		io.Copy(ctx.Writer, res.Body)
+		ctx.Status(http.StatusOK)
+		ctx.Writer.CloseNotify()
+	})
 
 	r.GET("/users", func(ctx *gin.Context) {
 		// http call to ramdomusers.com
 
 		req, err := http.NewRequest("GET", configs.ApiRandomUser, nil)
 		if err != nil {
-			log.Fatal((err))
+			log.Fatal(err)
 		}
 		query := req.URL.Query()
 		query.Add("seed", "a")
