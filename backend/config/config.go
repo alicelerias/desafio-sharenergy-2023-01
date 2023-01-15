@@ -9,6 +9,7 @@ import (
 type Config struct {
 	AuthCookie        string
 	Host              string
+	AllowedHosts      string
 	LoginPage         string
 	ApiRandomUser     string
 	ApiHttpCat        string
@@ -27,6 +28,7 @@ func GetConfig() *Config {
 		config = &Config{
 			AuthCookie:        os.Getenv("AUTH_COOKIE"),
 			Host:              os.Getenv("HOST"),
+			AllowedHosts:      os.Getenv("ALLOWED_HOSTS"),
 			LoginPage:         os.Getenv("LOGIN_PAGE"),
 			ApiRandomUser:     os.Getenv("API_RANDOM_USER"),
 			ApiHttpCat:        os.Getenv("API_HTTP_CAT"),

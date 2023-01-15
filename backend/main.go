@@ -15,7 +15,7 @@ func main() {
 
 	r.GET("/refresh", server.Refresh)
 
-	// r.Use(AuthenticationMiddleware())
+	r.Use(AuthenticationMiddleware())
 
 	r.GET("/clients", server.GetAll)
 	r.GET("/clients/:id", server.GetClient)

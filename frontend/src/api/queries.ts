@@ -26,6 +26,16 @@ type Users = {
   }[]
 }
 
+type Clients = {
+  clients: {
+    nome: string,
+    endereco: string,
+    email: string,
+    telefone: string,
+    CPF: string
+  }[]
+}
+
 
 
 export const getDog = async () : Promise<DogData> => {
@@ -33,10 +43,7 @@ export const getDog = async () : Promise<DogData> => {
   return data
 }
 
-// export const getCat = async (code : string) : Promise<Cat> => {
-//   const { data } = await axios.get<Cat>(configs.API_URL + `/cats?code=${code}`)
-//   return data
-// }
+
 export const getUsersSearch = async (search: string) : Promise<Users> => {
   const url = new URL(configs.API_URL + '/users')
   if (search) {
@@ -47,3 +54,12 @@ export const getUsersSearch = async (search: string) : Promise<Users> => {
 }
 
 
+export const getClients = async (search: string) : Promise<Clients> => {
+  const url = new URL(configs.API_URL + '/clients')
+  if (search) {
+    url.searchParams.append('search', search)
+  }
+  const { data } = await axios.get<Clients>(url.toString())
+  return data
+
+}

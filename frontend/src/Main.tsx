@@ -5,6 +5,7 @@ import { Dogs } from './components/Dogs'
 import { Users } from './components/Users'
 import { Clients } from './components/Clients'
 import { Login } from './components/Login'
+import { CreateClient } from './components/NewClient'
 
 export const Main = () => {
  return (
@@ -14,6 +15,7 @@ export const Main = () => {
   <Route path='/dogs' element={<Dogs/>} />
   <Route path='/users' element={<Users/>} />
   <Route path='/clients' element={<Clients/>} />
+  <Route path='/newClient' element={<CreateClient/>} />
 </Routes>
  )
 }
