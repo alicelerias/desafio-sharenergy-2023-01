@@ -6,14 +6,13 @@ module.exports = {
       colors: {
       transparent: 'transparent',
       current: 'currentColor',
-      'white': '#ffffff',
-      'purple': '#3f3cbb',
-      'midnight': '#121063',
-      'metal': '#565584',
-      'tahiti': '#3ab7bf',
-      'silver': '#ecebff',
-      'bubble-gum': '#ff77e9',
-      'bermuda': '#78dcca',
+      'blue': '#1BA2A1',
+      'green': '#D6DF27',
+      'greenHover': '#c3e200'
+      },
+      spacing: {
+        "one": "0.5rem",
+        "two": '1rem'
       }
     },
   },
