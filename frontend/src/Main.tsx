@@ -7,38 +7,33 @@ import { Clients } from './components/Clients'
 import { Login } from './components/Login'
 import { CreateClient } from './components/NewClient'
 import React from 'react'
+import { logout } from './api/mutations'
+import Logo from './assets/logo_sharenergy.png'
+import { Menu } from './components/Menu'
 
-const Menu : React.FC<{}> = () => {
-  return (<div>
-        <ul>
-        <li>
-          <Link to='/cats'>Cats</Link>
-        </li>
-        <li>
-          <Link to='/dogs'>Dogs</Link>
-        </li>
-        <li>
-          <Link to='/users'>Users</Link>
-        </li>
-        <li>
-          <Link to='/clients'>Clients</Link>
-        </li>
 
-      </ul>
-      <hr />
-  </div>)
-}
+
 
 type props = {
   title : string
 }
-const Layout : React.FC<React.PropsWithChildren<props>> = ({ title, children }) => {
+const Layout : React.FC<React.PropsWithChildren<props>> = ({ children }) => {
   return (
-    <div>
-      {title}
-      <Menu />
+    <div className='flex flex-col justify-center w-screen h-auto bg-gray-100'>
+      <div className="flex flex-col justify-between w-full h-auto bg-gray-100 p-8 sm:p-10 sm:w-lg sm:h-auto sm:mx-auto sm:space-y-8 ">
+        <div className='flex flex-col sm:flex-row justify-center'>
+        <div className='sm:py-4 sm:justify-start sm:w-auto'>
+        <img alt="logo" src={Logo} className="w-auto sm:w-3/6"/>
+        </div>
+        <div className='w-full  sm:w-3/6'>
+        <Menu />
+        </div>
+        </div>
+      
+
       <div className="body">
         {children}
+      </div>
       </div>
     </div>
   )
@@ -47,7 +42,18 @@ const Layout : React.FC<React.PropsWithChildren<props>> = ({ title, children }) 
 export const Main = () => {
  return (
   <Routes>
-  <Route path='/' element={<Login/>} />
+  <Route path='/login' element={<Login/>} />
+
+  <Route path='/' element={
+   <Layout title='users'>
+   <Users />
+ </Layout>
+  } />
+  <Route path='/users' element={
+   <Layout title='users'>
+   <Users />
+ </Layout>
+  } />
   <Route path='/cats' element={
     <Layout title='cats'>
       <Cats/>
@@ -56,11 +62,6 @@ export const Main = () => {
   <Route path='/dogs' element={
    <Layout title='dogs'>
    <Dogs/>
- </Layout>
-  } />
-  <Route path='/users' element={
-   <Layout title='users'>
-   <Users />
  </Layout>
   } />
   <Route path='/clients' element={

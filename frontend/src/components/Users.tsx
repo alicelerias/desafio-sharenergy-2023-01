@@ -6,7 +6,6 @@ import { Search } from "./Search";
 export const Users = () => {
   const [search, setSearch] = useState("")
   const { data, isLoading, refetch } = useQuery("getUsers", () => getUsersSearch(search));
-  console.log(data);
 
   return (
     <>

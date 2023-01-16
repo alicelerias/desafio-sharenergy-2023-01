@@ -13,7 +13,7 @@ axios.interceptors.response.use(function (response) {
   return response;
 }, function (error) {
   if (error.response?.status === HTTP_FORBIDDEN_STATUS) {
-    window.location.assign(configs.HOST)
+    window.location.assign(configs.HOST + "/login")
   }
   return Promise.reject(error);
 });

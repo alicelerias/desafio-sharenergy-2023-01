@@ -8,6 +8,7 @@ type User struct {
 	} `json:"name"`
 	Login struct {
 		UserName string `json:"username"`
+		Password string `json:"password"`
 	} `json:"login"`
 	Email string `json:"email"`
 	DOB   struct {

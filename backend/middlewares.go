@@ -3,6 +3,7 @@ package main
 import (
 	"net/http"
 
+	"github.com/alicelerias/desafio-sharenergy-2023-01/auth"
 	"github.com/alicelerias/desafio-sharenergy-2023-01/config"
 	"github.com/alicelerias/desafio-sharenergy-2023-01/errors"
 	"github.com/gin-gonic/gin"
@@ -27,11 +28,9 @@ func CORSMiddleware() gin.HandlerFunc {
 
 func AuthenticationMiddleware() gin.HandlerFunc {
 	configs := config.GetConfig()
-
 	return func(c *gin.Context) {
-		_, err := c.Cookie(configs.AuthCookie)
-
-		if err != nil {
+		token, _ := c.Cookie(configs.AuthCookie)
+		if err := auth.ValidateToken(token); err != nil {
 			err = errors.NewForbiddenError()
 			c.AbortWithError(http.StatusForbidden, err)
 		}

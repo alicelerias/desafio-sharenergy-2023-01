@@ -3,7 +3,7 @@ package server
 import (
 	"net/http"
 
-	"github.com/alicelerias/desafio-sharenergy-2023-01/queries"
+	"github.com/alicelerias/desafio-sharenergy-2023-01/database"
 	"github.com/alicelerias/desafio-sharenergy-2023-01/types"
 	"github.com/gin-gonic/gin"
 )
@@ -16,7 +16,7 @@ func GetClient(ctx *gin.Context) {
 		return
 	}
 
-	client, err := queries.GetUser(ctx, id)
+	client, err := database.GetClient(ctx, id)
 	if err != nil {
 		panic(err)
 	}
@@ -24,11 +24,7 @@ func GetClient(ctx *gin.Context) {
 }
 
 func GetAll(ctx *gin.Context) {
-
-	out := queries.GetAll(ctx)
-	if out == nil {
-		ctx.JSON(http.StatusBadRequest, gin.H{"error": "array is empty"})
-	}
+	out := database.GetAll(ctx)
 	ctx.JSON(http.StatusOK, gin.H{"clients": out})
 }
 
@@ -38,7 +34,7 @@ func CreateClient(ctx *gin.Context) {
 		ctx.JSON(http.StatusBadRequest, gin.H{"error": "invalid request body"})
 		return
 	}
-	client, err := queries.CreateUser(ctx, client)
+	client, err := database.CreateClient(ctx, client)
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, err.Error())
 		return
@@ -58,7 +54,7 @@ func UpdateClient(ctx *gin.Context) {
 		return
 	}
 	client.ID = id
-	client, err := queries.UpdateClient(ctx, client, id)
+	client, err := database.UpdateClient(ctx, client, id)
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, err.Error())
 		return
@@ -72,7 +68,7 @@ func DeleteClient(ctx *gin.Context) {
 		ctx.JSON(http.StatusBadRequest, gin.H{"error": "invalid id"})
 		return
 	}
-	if err := queries.DeleteClient(ctx, id); err != nil {
+	if err := database.DeleteClient(ctx, id); err != nil {
 		ctx.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}

@@ -4,6 +4,7 @@ import axios from "./axios";
 export type Credencial = {
   username: string
   password: string
+  remember_me: boolean
 }
 
 export type NewClient = {
@@ -16,6 +17,10 @@ export type NewClient = {
 
 export const login = async (input : Credencial) => {
   await axios.post(configs.API_URL + "/login", input)
+}
+
+export const logout = async () => {
+  await axios.post(configs.API_URL + "/logout")
 }
 
 export const createClient = async (input: NewClient) => {

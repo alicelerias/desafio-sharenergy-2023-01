@@ -1,19 +1,34 @@
 package main
 
 import (
+	"log"
+	"net/http"
+
+	"github.com/alicelerias/desafio-sharenergy-2023-01/database"
 	"github.com/alicelerias/desafio-sharenergy-2023-01/server"
 	"github.com/gin-gonic/gin"
 )
 
 func main() {
+	err := database.EnsureSchema()
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
 	r := gin.Default()
 	r.Use(CORSMiddleware())
 
-	r.GET("/api/heathcheck", server.HealthCheck)
+	r.GET("/heathcheck", func(c *gin.Context) {
+		c.JSON(http.StatusOK, gin.H{
+			"status": "ok",
+		})
+	})
+
+	r.POST("/user", server.CreateUser)
 
 	r.POST("/login", server.Login)
-
-	r.GET("/refresh", server.Refresh)
+	r.POST("/logout", server.Logout)
 
 	r.Use(AuthenticationMiddleware())
 

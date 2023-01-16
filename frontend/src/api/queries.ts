@@ -32,7 +32,7 @@ type Clients = {
     endereco: string,
     email: string,
     telefone: string,
-    CPF: string
+    cpf: string
   }[]
 }
 

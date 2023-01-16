@@ -17,6 +17,7 @@ type Config struct {
 	MongoDbConnection string
 	Database          string
 	Collection        string
+	JWTSecret         string
 }
 
 var config *Config
@@ -35,6 +36,7 @@ func GetConfig() *Config {
 			ApiRandomDog:      os.Getenv("API_RANDOM_DOG"),
 			MongoDbConnection: os.Getenv("CONNECTION"),
 			Database:          os.Getenv("DATABASE"),
+			JWTSecret:         os.Getenv("JWT_SECRET"),
 		}
 	}
 

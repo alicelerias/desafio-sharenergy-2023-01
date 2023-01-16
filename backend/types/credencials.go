@@ -1,6 +1,7 @@
 package types
 
-type Credencial struct {
-	Username string `json:"username"`
-	Password string `json:"password"`
+type Credential struct {
+	Username   string `json:"username"`
+	Password   string `json:"password"`
+	RememberMe bool   `json:"remember_me"`
 }
