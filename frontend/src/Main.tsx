@@ -10,6 +10,7 @@ import React from 'react'
 import { logout } from './api/mutations'
 import Logo from './assets/logo_sharenergy.png'
 import { Menu } from './components/Menu'
+import { ClientDetail } from './components/ClientDetail'
 
 
 
@@ -73,6 +74,12 @@ export const Main = () => {
    <Layout title='newClient'>
    <CreateClient/>
  </Layout>
+ 
+  } />
+   <Route path='/clients/detail' element={
+      <Layout title='clientDetail'>
+      <ClientDetail />
+    </Layout>
   } />
 </Routes>
  )

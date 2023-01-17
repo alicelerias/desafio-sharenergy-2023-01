@@ -1,7 +1,5 @@
-import React, { useState } from "react"
-import { useQuery } from "react-query"
-import { getUsersSearch } from "../api/queries"
-import configs from "../configs/configs"
+import React from "react"
+
 
 export const Search = ({ refetchUsers, setSearch, search }:any) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

@@ -1,42 +1,9 @@
 import configs from "../configs/configs"
+import { Client } from "../types/Client"
+import { Clients } from "../types/Clients"
+import { DogData } from "../types/Dogs"
+import { Users } from "../types/Users"
 import axios from './axios'
-
-
-type DogData = {
-  url: string
-}
-
-type Users = {
-  results: {
-    name: {
-      title: string,
-      first: string,
-      last: string
-    },
-    email: string,
-    login: {
-      username: string
-    }
-    dob: {
-      age: string,
-    }
-    picture: {
-      medium: string
-    }
-  }[]
-}
-
-type Clients = {
-  clients: {
-    nome: string,
-    endereco: string,
-    email: string,
-    telefone: string,
-    cpf: string
-  }[]
-}
-
-
 
 export const getDog = async () : Promise<DogData> => {
   const { data } = await axios.get<DogData>(configs.API_URL + "/dogs")
@@ -54,12 +21,20 @@ export const getUsersSearch = async (search: string) : Promise<Users> => {
 }
 
 
-export const getClients = async (search: string) : Promise<Clients> => {
-  const url = new URL(configs.API_URL + '/clients')
-  if (search) {
-    url.searchParams.append('search', search)
-  }
+export const getClients = async (id: string) : Promise<Clients> => {
+  let url = id ? new URL(configs.API_URL +'/clients'+`/${id}`) : new URL(configs.API_URL + '/clients')
+
   const { data } = await axios.get<Clients>(url.toString())
+
   return data
 
+}
+
+export const getClient = async (id: string | null) : Promise<Client> => {
+  const url = new URL(configs.API_URL+`/clients/${id}`)
+
+  const { data } = await axios.get<Client>(url.toString())
+
+
+  return data 
 }

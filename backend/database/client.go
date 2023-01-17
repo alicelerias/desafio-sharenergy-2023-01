@@ -28,11 +28,12 @@ func GetAll(ctx *gin.Context) []types.Client {
 
 	defer results.Close(ctx)
 	for results.Next(ctx) {
-		var singleClient types.Client
+		var singleClient models.Client
 		if err = results.Decode(&singleClient); err != nil {
 			return []types.Client{}
 		}
-		clients = append(clients, singleClient)
+
+		clients = append(clients, fromModel(singleClient))
 	}
 	return clients
 }
@@ -142,7 +143,7 @@ func toModel(in types.Client) models.Client {
 
 func fromModel(in models.Client) types.Client {
 	return types.Client{
-		ID:       in.ID.String(),
+		ID:       in.ID.Hex(),
 		Nome:     in.Nome,
 		Email:    in.Email,
 		Endereco: in.Endereco,

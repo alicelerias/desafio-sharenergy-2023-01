@@ -20,7 +20,7 @@ func GetClient(ctx *gin.Context) {
 	if err != nil {
 		panic(err)
 	}
-	ctx.JSON(http.StatusOK, gin.H{"client": client})
+	ctx.JSON(http.StatusOK, client)
 }
 
 func GetAll(ctx *gin.Context) {

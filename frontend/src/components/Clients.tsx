@@ -1,12 +1,16 @@
 import { useState } from "react";
 import { useQuery } from "react-query";
-import { Link } from "react-router-dom";
-import { getClients } from "../api/queries";
-import { AiOutlineUserAdd} from 'react-icons/ai'
+import { Link, useNavigate } from "react-router-dom";
+import {  getClients } from "../api/queries";
+import { AiOutlineUserAdd, AiOutlineLoading} from 'react-icons/ai'
 
 export const Clients = () => {
-  const [search, setSearch] = useState("")
-  const { data, isLoading } = useQuery("getClients", () => getClients(search));
+  const navigate = useNavigate()
+  const [id, setId] = useState("")
+  const { data, isLoading, refetch } = useQuery("getClients", () => getClients(id));
+
+
+
   console.log(data);
 
   return (
@@ -20,10 +24,17 @@ export const Clients = () => {
       </div>
      <div className="flex flex-col sm:grid grid-cols-4 gap-4 w-5/6 space-y-4 sm:space-y-0">
      {isLoading
-        ? "Loading..."
+        ? <AiOutlineLoading />
         : 
         data?.clients?.map((client) => (
-            <div className="flex flex-col justify-center bg-blue-design p-4 space-y-2 text-gray-200 shadow-sm shadow-gray-300">
+            <div 
+              className="flex flex-col flex-wrap justify-center cursor-pointer bg-blue-design p-4 space-y-2 text-gray-100 shadow-sm shadow-gray-300"
+              onClick={() => {
+                setId(client.id)
+                navigate(`/clients/detail?id=${client.id}`)
+                console.log(id)
+              }}
+              >
 
               <p className="text-xl">{client.nome}</p>
               <p>Email: {client.email}</p>

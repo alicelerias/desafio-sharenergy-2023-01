@@ -1,11 +1,12 @@
 import { FieldValues, useForm } from 'react-hook-form'
 import { useMutation } from 'react-query'
 import { useNavigate } from 'react-router'
-import { Credencial, login } from '../api/mutations'
+import { login } from '../api/mutations'
 import configs from '../configs/configs'
 import Ilustration from '../assets/solar-panel-house.svg'
 import Logo from '../assets/logo_sharenergy.png'
 import { LoginForm } from './LoginForm'
+import { Credencial } from '../types/Credencial'
 
 
 export const Login = () => {
