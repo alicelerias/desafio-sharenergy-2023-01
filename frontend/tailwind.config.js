@@ -4,20 +4,20 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        transparent: 'transparent',
-        current: 'currentColor',
+        transparent: "transparent",
+        current: "currentColor",
         blue: {
-          'design': '#1BA2A1'
+          design: "#1BA2A1",
         },
         green: {
-          'design': '#D6DF27',
-          'design-hover': '#c3e200'
-        }
+          design: "#D6DF27",
+          "design-hover": "#c3e200",
+        },
       },
       spacing: {
-        "one": "0.5rem",
-        "two": '1rem'
-      }
+        one: "0.5rem",
+        two: "1rem",
+      },
     },
   },
   plugins: [],

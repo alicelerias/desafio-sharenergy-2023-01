@@ -1,9 +1,9 @@
 export type Client = {
-  id: string,
-  nome: string,
-  endereco: string,
-  email: string,
-  telefone: string,
+  id: string
+  nome: string
+  endereco: string
+  email: string
+  telefone: string
   cpf: string
 }
 

@@ -2,7 +2,7 @@ import { useMutation } from "react-query"
 import { useNavigate } from "react-router-dom"
 import { deleteClient } from "../api/mutations"
 import { useAlert } from "./Alert"
-import {AiFillDelete} from 'react-icons/ai'
+import { AiFillDelete } from "react-icons/ai"
 
 type props = {
   id: string
@@ -10,7 +10,7 @@ type props = {
 export const DeleteButton: React.FC<props> = ({ id }) => {
   const navigate = useNavigate()
 
-  const { mutate } = useMutation(()=>deleteClient(id), {
+  const { mutate } = useMutation(() => deleteClient(id), {
     onSuccess: () => {
       setTimeout(() => {
         navigate("/clients")
@@ -23,14 +23,14 @@ export const DeleteButton: React.FC<props> = ({ id }) => {
 
     showAlert()
   }
-  const buttonCss = "focus:outline-none text-white text-3xl bg-green-design hover:bg-green-design-hover rounded p2 w-auto transition duration-150 ease-in"
-  
+  const buttonCss =
+    "focus:outline-none text-white text-3xl bg-green-design hover:bg-green-design-hover rounded p2 w-auto transition duration-150 ease-in"
+
   return (
     <>
-    <button onClick={onDelete} className={buttonCss}>
-    <AiFillDelete />   
-    </button>
+      <button onClick={onDelete} className={buttonCss}>
+        <AiFillDelete />
+      </button>
     </>
   )
-
 }

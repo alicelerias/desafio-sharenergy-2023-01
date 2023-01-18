@@ -1,10 +1,10 @@
-import { useQuery } from "react-query";
-import { getDog } from "../api/queries";
-import { AiOutlineLoading } from "react-icons/ai";
-import { Spinner } from "./Spinner";
+import { useQuery } from "react-query"
+import { getDog } from "../api/queries"
+import { AiOutlineLoading } from "react-icons/ai"
+import { Spinner } from "./Spinner"
 
 export const Dogs = () => {
-  const { data, refetch, isFetching } = useQuery("getDogs", getDog);
+  const { data, refetch, isFetching } = useQuery("getDogs", getDog)
 
   return (
     <div className="flex flex-col min-h-[16em] justify-start mx-auto space-y-4 sm:w-2/5 sm:shadow-lg shadow-gray-400 sm:p-4">
@@ -25,5 +25,5 @@ export const Dogs = () => {
         <img src={data?.url} className="sm:w-2/3 mx-auto" alt="not found" />
       )}
     </div>
-  );
-};
+  )
+}

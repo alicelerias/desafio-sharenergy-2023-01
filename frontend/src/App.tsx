@@ -1,13 +1,13 @@
-import { QueryClient, QueryClientProvider } from 'react-query'
-import './input.css'
-import { Main } from './Main';
+import { QueryClient, QueryClientProvider } from "react-query"
+import "./input.css"
+import { Main } from "./Main"
 
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      refetchOnWindowFocus: false
-    }
-  }
+      refetchOnWindowFocus: false,
+    },
+  },
 })
 
 function App() {
@@ -15,7 +15,7 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <Main />
     </QueryClientProvider>
-  );
+  )
 }
 
-export default App;
+export default App

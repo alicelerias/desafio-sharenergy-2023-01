@@ -1,18 +1,18 @@
-import { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
-import configs from "../configs/configs";
-import { Spinner } from "./Spinner";
+import { useEffect, useState } from "react"
+import { useForm } from "react-hook-form"
+import configs from "../configs/configs"
+import { Spinner } from "./Spinner"
 
 export const Cats = () => {
-  const [code, setCode] = useState("500");
-  const [url, setURL] = useState("404");
+  const [code, setCode] = useState("500")
+  const [url, setURL] = useState("404")
 
   useEffect(() => {
     const timeout = setTimeout(() => {
-      setURL(configs.API_URL + `/cats?code=${code}`);
-    }, 500);
-    return () => clearTimeout(timeout);
-  }, [code]);
+      setURL(configs.API_URL + `/cats?code=${code}`)
+    }, 500)
+    return () => clearTimeout(timeout)
+  }, [code])
 
   return (
     <div className="flex flex-col min-h-[16em] justify-start mx-auto space-y-4 sm:w-2/5 sm:shadow-lg shadow-gray-400 sm:p-4">
@@ -25,5 +25,5 @@ export const Cats = () => {
       />
       <img className="sm:w-2/3 mx-auto" src={url} alt="" />
     </div>
-  );
-};
+  )
+}
