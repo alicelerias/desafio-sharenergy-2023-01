@@ -9,9 +9,8 @@ import (
 
 const COLLECTION_USER = "user"
 
-func GetUser(ctx context.Context, username string) (user *models.User, err error) {
-	db := GetConnection()
-	err = db.Collection(COLLECTION_USER).
+func (s *MongoDBRepository) GetUser(ctx context.Context, username string) (user *models.User, err error) {
+	err = s.db.Collection(COLLECTION_USER).
 		FindOne(ctx, bson.M{
 			"username": username,
 		}, nil).
@@ -20,9 +19,8 @@ func GetUser(ctx context.Context, username string) (user *models.User, err error
 	return
 }
 
-func CreateUser(ctx context.Context, user *models.User) (err error) {
-	db := GetConnection()
-	_, err = db.Collection(COLLECTION_USER).
+func (s *MongoDBRepository) CreateUser(ctx context.Context, user *models.User) (err error) {
+	_, err = s.db.Collection(COLLECTION_USER).
 		InsertOne(ctx, user)
 	return
 }

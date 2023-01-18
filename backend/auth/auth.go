@@ -13,9 +13,9 @@ type Tokens struct {
 	AccessToken string `json:"access_token"`
 }
 
-func Authenticate(ctx context.Context, creds *types.Credential) (tokens *Tokens, err error) {
+func Authenticate(ctx context.Context, repository database.Repository, creds *types.Credential) (tokens *Tokens, err error) {
 	tokens = &Tokens{}
-	user, err := database.GetUser(ctx, creds.Username)
+	user, err := repository.GetUser(ctx, creds.Username)
 	if err != nil {
 		return
 	}

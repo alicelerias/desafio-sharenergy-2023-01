@@ -10,14 +10,14 @@ import (
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
-func Login(ctx *gin.Context) {
+func (s *Server) Login(ctx *gin.Context) {
 	configs := config.GetConfig()
 	var credentials types.Credential
 	if err := ctx.ShouldBindJSON(&credentials); err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{"error": "invalid request"})
 		return
 	}
-	token, err := auth.Authenticate(ctx, &credentials)
+	token, err := auth.Authenticate(ctx, s.repository, &credentials)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {
 			ctx.AbortWithError(http.StatusUnauthorized, err)
@@ -25,23 +25,23 @@ func Login(ctx *gin.Context) {
 		}
 		panic(err)
 	}
-	ctx.SetCookie(configs.AuthCookie, token.AccessToken, 3600, "/", configs.Host, true, true)
+	ctx.SetCookie(configs.AuthCookie, token.AccessToken, 0, "/", configs.Host, true, true)
 	ctx.AbortWithStatus(http.StatusOK)
 }
 
-func Logout(ctx *gin.Context) {
+func (s *Server) Logout(ctx *gin.Context) {
 	configs := config.GetConfig()
-	ctx.SetCookie(configs.AuthCookie, "", 3600, "/", configs.Host, true, true)
+	ctx.SetCookie(configs.AuthCookie, "", 0, "/", configs.Host, true, true)
 	ctx.AbortWithStatus(http.StatusOK)
 }
 
-func CreateUser(ctx *gin.Context) {
+func (s *Server) CreateUser(ctx *gin.Context) {
 	user := &types.User{}
 	if err := ctx.ShouldBindJSON(user); err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{"error": "invalid request"})
 		return
 	}
-	if err := auth.CreateUser(ctx, user); err != nil {
+	if err := auth.CreateUser(ctx, s.repository, user); err != nil {
 		if errs, ok := err.(mongo.WriteException); ok {
 			for _, e := range errs.WriteErrors {
 				if e.Code == 11000 {

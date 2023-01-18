@@ -16,8 +16,7 @@ func GetSignedToken(sub string, username string, exp int64) (token string, err e
 		"exp":      exp,
 	})
 
-	secret := []byte(config.GetConfig().JWTSecret)
-	token, err = unsignedToken.SignedString(secret)
+	token, err = unsignedToken.SignedString(config.GetConfig().JWTSecret)
 	return
 }
 

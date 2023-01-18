@@ -9,9 +9,6 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
-var connection *mongo.Client
-var database *mongo.Database
-
 func GetConnection() *mongo.Database {
 	configs := config.GetConfig()
 
@@ -25,7 +22,5 @@ func GetConnection() *mongo.Database {
 		log.Fatal(err)
 	}
 
-	database = client.Database(configs.Database)
-
-	return database
+	return client.Database(configs.Database)
 }

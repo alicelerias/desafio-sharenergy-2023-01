@@ -14,7 +14,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func GetCats(ctx *gin.Context) {
+func (s *Server) GetCats(ctx *gin.Context) {
 	configs := config.GetConfig()
 	code, ok := ctx.GetQuery("code")
 	if !ok {
@@ -32,7 +32,7 @@ func GetCats(ctx *gin.Context) {
 	ctx.Writer.CloseNotify()
 }
 
-func GetDogs(ctx *gin.Context) {
+func (s *Server) GetDogs(ctx *gin.Context) {
 	configs := config.GetConfig()
 	var dog string = "woof.json"
 
@@ -48,7 +48,7 @@ func GetDogs(ctx *gin.Context) {
 
 }
 
-func GetUsers(ctx *gin.Context) {
+func (s *Server) GetUsers(ctx *gin.Context) {
 	configs := config.GetConfig()
 	req, err := http.NewRequest("GET", configs.ApiRandomUser, nil)
 	if err != nil {
@@ -106,5 +106,4 @@ func GetUsers(ctx *gin.Context) {
 		ctx.Status(http.StatusOK)
 		ctx.Writer.CloseNotify()
 	}
-
 }

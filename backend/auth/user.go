@@ -3,7 +3,6 @@ package auth
 import (
 	"context"
 	"crypto/rand"
-	"fmt"
 	"time"
 
 	"github.com/alicelerias/desafio-sharenergy-2023-01/database"
@@ -13,8 +12,8 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
-func CreateUser(ctx context.Context, user *types.User) error {
-	return database.CreateUser(ctx, userToModel(user))
+func CreateUser(ctx context.Context, repository database.Repository, user *types.User) error {
+	return repository.CreateUser(ctx, userToModel(user))
 }
 
 func saltPassword(salt []byte, password string) []byte {
@@ -38,7 +37,6 @@ func hashPassword(password string) (hash, salt []byte) {
 }
 
 func userToModel(user *types.User) *models.User {
-	fmt.Println(user)
 	hash, salt := hashPassword(user.Login.Password)
 	return &models.User{
 		ID:           primitive.NewObjectID(),

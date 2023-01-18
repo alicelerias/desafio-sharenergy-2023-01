@@ -1,20 +1,24 @@
 package main
 
 import (
+	"context"
 	"log"
 	"net/http"
 
+	"github.com/alicelerias/desafio-sharenergy-2023-01/auth"
 	"github.com/alicelerias/desafio-sharenergy-2023-01/database"
 	"github.com/alicelerias/desafio-sharenergy-2023-01/server"
+	"github.com/alicelerias/desafio-sharenergy-2023-01/types"
 	"github.com/gin-gonic/gin"
 )
 
 func main() {
-	err := database.EnsureSchema()
+	mongoRepository := database.NewMongoDBRepository()
+	ensure(mongoRepository.EnsureSchema())
 
-	if err != nil {
-		log.Fatal(err)
-	}
+	createAdmin(mongoRepository)
+
+	server := server.NewServer(mongoRepository)
 
 	r := gin.Default()
 	r.Use(CORSMiddleware())
@@ -26,7 +30,6 @@ func main() {
 	})
 
 	r.POST("/user", server.CreateUser)
-
 	r.POST("/login", server.Login)
 	r.POST("/logout", server.Logout)
 
@@ -43,4 +46,31 @@ func main() {
 	r.GET("/users", server.GetUsers)
 
 	r.Run()
+}
+
+func ensure(err error) {
+	if err != nil {
+		log.Fatal(err)
+	}
+}
+
+func createAdmin(repository database.Repository) {
+	auth.CreateUser(context.Background(), repository, &types.User{
+		Name: struct {
+			Title string "json:\"title\""
+			First string "json:\"first\""
+			Last  string "json:\"last\""
+		}{
+			Title: "Corp.",
+			First: "Sharenergy",
+			Last:  "Inc.",
+		},
+		Login: struct {
+			UserName string "json:\"username\""
+			Password string "json:\"password\""
+		}{
+			UserName: "desafiosharenergy",
+			Password: "sh@r3n3rgy",
+		},
+	})
 }

@@ -47,7 +47,7 @@ func TestGetSignedToken(t *testing.T) {
 }
 
 func TestValidateToken(t *testing.T) {
-	config.GetConfig().JWTSecret = "secret"
+	config.GetConfig().JWTSecret = []byte("secret")
 
 	// Test case 1: validate a valid token
 	sub := "123"
@@ -74,7 +74,7 @@ func TestValidateToken(t *testing.T) {
 	username = "user3"
 	exp = time.Now().Add(time.Minute * 10).Unix()
 	token, _ = auth.GetSignedToken(sub, username, exp)
-	config.GetConfig().JWTSecret = "wrongsecret"
+	config.GetConfig().JWTSecret = []byte("wrongsecret")
 	err = auth.ValidateToken(token)
 	if err == nil {
 		t.Error("Token with invalid signature should return an error")
