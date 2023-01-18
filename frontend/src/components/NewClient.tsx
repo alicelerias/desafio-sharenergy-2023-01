@@ -10,7 +10,6 @@ import { useAlert } from "./Alert"
 
 export const CreateClient = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  console.log(searchParams.get('id'))
 
   const navigate = useNavigate()
   const {formState: {errors}, handleSubmit, register, reset } = useForm()

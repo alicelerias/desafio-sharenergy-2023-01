@@ -20,8 +20,8 @@ type props = {
 }
 const Layout : React.FC<React.PropsWithChildren<props>> = ({ children }) => {
   return (
-    <div className='flex flex-col justify-center w-screen h-auto bg-gray-100'>
-      <div className="flex flex-col justify-between w-full h-auto bg-gray-100 p-8 sm:p-10 sm:w-lg sm:h-auto sm:mx-auto sm:space-y-8 ">
+    <div className='flex flex-col justify-center w-screen h-auto bg-white'>
+      <div className="flex flex-col justify-between w-full h-auto bg-white p-8 sm:p-10 sm:w-lg sm:h-auto sm:mx-auto sm:space-y-8 ">
         <div className='flex flex-col sm:flex-row justify-center'>
         <div className='sm:py-4 sm:justify-start sm:w-auto'>
         <img alt="logo" src={Logo} className="w-auto sm:w-3/6"/>

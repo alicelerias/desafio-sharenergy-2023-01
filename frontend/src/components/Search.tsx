@@ -3,8 +3,9 @@ import React from "react"
 
 export const Search = ({ refetchUsers, setSearch, search }:any) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearch(e.target.value)
+    setSearch(e.target.value.trim())
   }
+  
   return (
     <div className="flex flex-row sm:px-60">
      <input
@@ -16,7 +17,9 @@ export const Search = ({ refetchUsers, setSearch, search }:any) => {
         value={search}
       />
       <button 
-        onClick={() => refetchUsers()}
+        onClick={() => 
+          refetchUsers()
+          }
         className="flex items-center justify-center w-1/6 focus:outline-none text-white text-xl sm:text-base bg-green-design hover:bg-green-design-hover  py-2 sm:h-8 transition duration-150 ease-in" > Ir </button>
     </div>
   )

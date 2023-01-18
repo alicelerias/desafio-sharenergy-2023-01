@@ -10,11 +10,19 @@ export const getDog = async () : Promise<DogData> => {
   return data
 }
 
+type Get = {
+  search: string,
+  currentPage: number
 
-export const getUsersSearch = async (search: string) : Promise<Users> => {
+}
+
+
+export const getUsersSearch = async ({search, currentPage}: Get) : Promise<Users> => {
   const url = new URL(configs.API_URL + '/users')
   if (search) {
     url.searchParams.append('search', search)
+  } else if (currentPage) {
+    url.searchParams.append('page', currentPage.toString())
   }
   const { data } = await axios.get<Users>(url.toString())
   return data

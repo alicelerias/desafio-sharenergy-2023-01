@@ -1,22 +1,29 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import configs from "../configs/configs";
-
-
+import { Spinner } from "./Spinner";
 
 export const Cats = () => {
-  const [code, setCode] = useState("500")
-  // if (!code) {
-  //   return "não encontrado"
-  // } 
-  
-  return (
-    <div className="flex flex-wrap justify-center mx-auto space-y-4 sm:w-2/5 sm:shadow-sm shadow-gray-400 sm:p-4">
-  <img className="sm:w-2/3"
-  src={configs.API_URL + `/cats?code=${code}`} alt= ""/>
-  
-  <input className="text-xl text-white sm:text-sm placeholder-gray-300 bg-blue-design pl-10 pr-4  border-gray-400 w-5/6 sm:h-8 py-2 focus:outline-none focus:border-blue-400" placeholder="Digite um status" onBlur={(e) => {setCode(e.target.value)}}/>
-  </div>)
+  const [code, setCode] = useState("500");
+  const [url, setURL] = useState("404");
 
-}
-  
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setURL(configs.API_URL + `/cats?code=${code}`);
+    }, 500);
+    return () => clearTimeout(timeout);
+  }, [code]);
+
+  return (
+    <div className="flex flex-col min-h-[16em] justify-start mx-auto space-y-4 sm:w-2/5 sm:shadow-lg shadow-gray-400 sm:p-4">
+      <input
+        type="text"
+        id="inputCats"
+        className="appearance-none mx-auto text-xl text-white sm:text-sm  placeholder-gray-300 bg-blue-design pl-10 pr-4  border-gray-400 w-5/6 sm:h-8 py-2 focus:outline-none focus:border-blue-400"
+        placeholder="Digite um status"
+        onChange={(e) => setCode(e.target.value)}
+      />
+      <img className="sm:w-2/3 mx-auto" src={url} alt="" />
+    </div>
+  );
+};
