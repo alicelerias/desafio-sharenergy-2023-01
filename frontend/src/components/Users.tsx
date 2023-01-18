@@ -2,7 +2,6 @@ import { useCallback, useEffect, useState } from "react"
 import { useQuery } from "react-query"
 import { getUsersSearch } from "../api/queries"
 import { Search } from "./Search"
-import { AiOutlineLoading } from "react-icons/ai"
 import { User } from "../types/Users"
 import { Spinner } from "./Spinner"
 

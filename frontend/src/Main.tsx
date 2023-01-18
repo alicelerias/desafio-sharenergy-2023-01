@@ -1,4 +1,4 @@
-import { Routes, Route, Link } from "react-router-dom"
+import { Routes, Route } from "react-router-dom"
 
 import { Cats } from "./components/Cats"
 import { Dogs } from "./components/Dogs"
@@ -7,7 +7,6 @@ import { Clients } from "./components/Clients"
 import { Login } from "./components/Login"
 import { CreateClient } from "./components/NewClient"
 import React from "react"
-import { logout } from "./api/mutations"
 import Logo from "./assets/logo_sharenergy.png"
 import { Menu } from "./components/Menu"
 import { ClientDetail } from "./components/ClientDetail"

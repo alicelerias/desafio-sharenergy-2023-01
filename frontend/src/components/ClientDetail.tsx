@@ -1,16 +1,15 @@
-import React, { useCallback, useState } from "react"
 import { FieldValues, useForm } from "react-hook-form"
 import { useMutation, useQuery } from "react-query"
 import { useNavigate, useSearchParams } from "react-router-dom"
-import { createClient, updateClient } from "../api/mutations"
-import { getClient, getClients } from "../api/queries"
-import { Client, NewClient } from "../types/Client"
+import { updateClient } from "../api/mutations"
+import { getClient } from "../api/queries"
+import { Client } from "../types/Client"
 import { useAlert } from "./Alert"
 import { AiFillSave } from "react-icons/ai"
 import { DeleteButton } from "./DeleteButton"
 
 export const ClientDetail = () => {
-  const [searchParams, setSearchParams] = useSearchParams()
+  const [searchParams] = useSearchParams()
   const id = searchParams.get("id")!
 
   const navigate = useNavigate()
@@ -20,13 +19,6 @@ export const ClientDetail = () => {
     register,
     reset,
   } = useForm()
-  const { data, isLoading, refetch } = useQuery(
-    "getClient",
-    () => getClient(id),
-    {
-      onSuccess: (data) => reset(data),
-    }
-  )
 
   const { mutate } = useMutation((data: Client) => updateClient(data, id), {
     onSuccess: () => {

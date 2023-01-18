@@ -1,14 +1,12 @@
-import React, { useCallback, useState } from "react"
+import React from "react"
 import { FieldValues, useForm } from "react-hook-form"
 import { useMutation } from "react-query"
-import { useNavigate, useSearchParams } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import { createClient } from "../api/mutations"
 import { NewClient } from "../types/Client"
 import { useAlert } from "./Alert"
 
 export const CreateClient = () => {
-  const [searchParams, setSearchParams] = useSearchParams()
-
   const navigate = useNavigate()
   const {
     formState: { errors },
