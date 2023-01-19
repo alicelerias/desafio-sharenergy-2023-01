@@ -20,6 +20,10 @@ export const ClientDetail = () => {
     reset,
   } = useForm()
 
+  useQuery("getClient", () => getClient(id), {
+    onSuccess: (data) => reset(data),
+  })
+
   const { mutate } = useMutation((data: Client) => updateClient(data, id), {
     onSuccess: () => {
       setTimeout(() => {
