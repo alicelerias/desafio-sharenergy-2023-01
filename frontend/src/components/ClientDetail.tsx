@@ -7,6 +7,12 @@ import { Client } from "../types/Client"
 import { useAlert } from "./Alert"
 import { AiFillSave } from "react-icons/ai"
 import { DeleteButton } from "./DeleteButton"
+import { InputForm } from "./InputForm"
+import {
+  validateCPF,
+  validateEMail,
+  validateTelefone,
+} from "../validates/validate"
 
 export const ClientDetail = () => {
   const [searchParams] = useSearchParams()
@@ -38,8 +44,6 @@ export const ClientDetail = () => {
     showAlert()
   }
 
-  const inputCss =
-    "p-2 bg-blue-design  placeholder-gray-200 w-full  focus:outline-none text-white "
   const spanCss = "text-blue-design w-full text-start"
   const buttonCss =
     "focus:outline-none text-white text-3xl bg-green-design hover:bg-green-design-hover rounded p2 w-auto transition duration-150 ease-in"
@@ -55,47 +59,55 @@ export const ClientDetail = () => {
           Cliente{" "}
         </p>
         <span className={`${spanCss}`}>Nome:</span>
-        <input
-          {...register("nome", { required: true })}
+        <InputForm
+          controller={register("nome", {
+            required: true,
+          })}
           type="text"
           placeholder="Nome"
-          className={`${inputCss}`}
+          error={errors.nome}
         />
         <span className={`${spanCss}`}>Email:</span>
-        <input
-          {...register("email", { required: true })}
-          type="email"
+        <InputForm
+          controller={register("email", {
+            required: true,
+            validate: validateEMail,
+          })}
+          type="text"
           placeholder="Email"
-          className={`${inputCss}`}
+          error={errors.email}
         />
+
         <span className={`${spanCss}`}>Endereço:</span>
-        <input
-          {...register("endereco", { required: true })}
+        <InputForm
+          controller={register("endereco", {
+            required: true,
+          })}
           type="text"
           placeholder="Endereço"
-          className={`${inputCss}`}
+          error={errors.endereco}
         />
+
         <span className={`${spanCss}`}>Telefone:</span>
-        <input
-          {...register("telefone", { required: true })}
+        <InputForm
+          controller={register("telefone", {
+            required: true,
+            validate: validateTelefone,
+          })}
           type="number"
-          minLength={11}
-          maxLength={11}
-          className={`${inputCss}`}
+          placeholder="Telefone"
+          error={errors.telefone}
         />
         <span className={`${spanCss}`}>CPF:</span>
-        <input
-          {...register("cpf", { required: true })}
+        <InputForm
+          controller={register("cpf", {
+            required: true,
+            validate: validateCPF,
+          })}
           type="number"
           placeholder="CPF"
-          className={`${inputCss}`}
+          error={errors.cpf}
         />
-        {(errors.nome ||
-          errors.email ||
-          errors.endereco ||
-          errors.telefone ||
-          errors.cpf) && <Alert message="Campo obrigatório" type="error" />}
-
         <div className="flex flex-row space-x-4">
           <button type="submit" className={`${buttonCss}`}>
             <AiFillSave />

@@ -19,7 +19,7 @@ export const useAlert = () => {
       <>
         {show && (
           <div className={`w-full p-2 m-2 ${color}`}>
-            <p className="w-full text-white text-center font-semibold text-lg">
+            <p className="w-full text-white text-center font-semibold text-sm">
               {message}
             </p>
           </div>

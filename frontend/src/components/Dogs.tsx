@@ -1,6 +1,5 @@
 import { useQuery } from "react-query"
 import { getDog } from "../api/queries"
-import { AiOutlineLoading } from "react-icons/ai"
 import { Spinner } from "./Spinner"
 
 export const Dogs = () => {

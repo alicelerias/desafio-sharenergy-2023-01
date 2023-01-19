@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react"
-import { useForm } from "react-hook-form"
 import configs from "../configs/configs"
-import { Spinner } from "./Spinner"
 
 export const Cats = () => {
   const [code, setCode] = useState("500")

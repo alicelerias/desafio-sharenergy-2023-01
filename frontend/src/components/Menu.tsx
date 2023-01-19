@@ -2,30 +2,24 @@ import { Link } from "react-router-dom"
 import { logout } from "../api/mutations"
 
 export const Menu: React.FC<{}> = () => {
+  const cssMenu =
+    "px-2 text-blue-design text-bold border-b-2 border-blue-design hover:text-green-design hover:border-green-design transition duration-150 ease-in"
   return (
     <div className="flex flex-row py-8 sm:py-4 space-x-6 justify-center ">
       <Link to="/cats">
-        <div className="px-2 text-blue-design text-bold border-b-2 border-blue-design hover:text-green-design hover:border-green-design transition duration-150 ease-in">
-          Cats
-        </div>
+        <div className={cssMenu}>Cats</div>
       </Link>
 
       <Link to="/dogs">
-        <div className="tpx-2 text-blue-design text-bold border-b-2 border-blue-design hover:text-green-design hover:border-green-design transition duration-150 ease-in">
-          Dogs
-        </div>
+        <div className={cssMenu}>Dogs</div>
       </Link>
 
       <Link to="/users">
-        <div className="px-2 text-blue-design text-bold border-b-2 border-blue-design hover:text-green-design hover:border-green-design transition duration-150 ease-in">
-          Users
-        </div>
+        <div className={cssMenu}>Users</div>
       </Link>
 
       <Link to="/clients">
-        <div className="px-2 text-blue-design text-bold border-b-2 border-blue-design hover:text-green-design hover:border-green-design transition duration-150 ease-in">
-          Clients
-        </div>
+        <div className={cssMenu}>Clients</div>
       </Link>
 
       <Link

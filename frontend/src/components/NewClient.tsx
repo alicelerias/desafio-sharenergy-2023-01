@@ -5,6 +5,12 @@ import { useNavigate } from "react-router-dom"
 import { createClient } from "../api/mutations"
 import { NewClient } from "../types/Client"
 import { useAlert } from "./Alert"
+import { InputForm } from "./InputForm"
+import {
+  validateCPF,
+  validateEMail,
+  validateTelefone,
+} from "../validates/validate"
 
 export const CreateClient = () => {
   const navigate = useNavigate()
@@ -28,9 +34,6 @@ export const CreateClient = () => {
     showAlert()
   }
 
-  const inputCss =
-    "p-2 bg-blue-design  placeholder-gray-200 w-full focus:outline-none text-white "
-
   return (
     <div className="flex flex-col justify-center items-center sm:w-1/3 sm:mx-auto sm:shadow-md shadow-gray-300 sm:px-2 sm: py-8 sm:border-2 border-blue-design">
       <form
@@ -42,41 +45,54 @@ export const CreateClient = () => {
           {" "}
           Novo Cliente{" "}
         </p>
-        <input
-          {...register("nome", { required: true })}
+
+        <InputForm
+          controller={register("nome", {
+            required: true,
+          })}
           type="text"
           placeholder="Nome"
-          className={`${inputCss}`}
+          error={errors.nome}
         />
-        <input
-          {...register("email", { required: true })}
-          type="email"
+
+        <InputForm
+          controller={register("email", {
+            required: true,
+            validate: validateEMail,
+          })}
+          type="text"
           placeholder="Email"
-          className={`${inputCss}`}
+          error={errors.email}
         />
-        <input
-          {...register("endereco", { required: true })}
+
+        <InputForm
+          controller={register("endereco", {
+            required: true,
+          })}
           type="text"
           placeholder="Endereço"
-          className={`${inputCss}`}
+          error={errors.endereco}
         />
-        <input
-          {...register("telefone", { required: true })}
+
+        <InputForm
+          controller={register("telefone", {
+            required: true,
+            validate: validateTelefone,
+          })}
           type="number"
           placeholder="Telefone"
-          className={`${inputCss}`}
+          error={errors.telefone}
         />
-        <input
-          {...register("cpf", { required: true })}
+
+        <InputForm
+          controller={register("cpf", {
+            required: true,
+            validate: validateCPF,
+          })}
           type="number"
           placeholder="CPF"
-          className={`${inputCss}`}
+          error={errors.cpf}
         />
-        {(errors.nome ||
-          errors.email ||
-          errors.endereco ||
-          errors.telefone ||
-          errors.cpf) && <Alert message="Campo obrigatório" type="error" />}
 
         <button
           type="submit"
