@@ -16,7 +16,6 @@ type Config struct {
 	ApiRandomDog      string
 	MongoDbConnection string
 	Database          string
-	Collection        string
 	JWTSecret         []byte
 }
 
