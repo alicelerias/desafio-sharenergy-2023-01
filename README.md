@@ -2,6 +2,11 @@
 
 App Sharenergy foi desenvolvido para o Desafio Sharenergy. O backend da aplicação foi feito em Go, o banco de dados utilizado é o MongoDB, o frontend foi feito em React/Typescript e o style foi feito de maneira responsiva utilizando TailWind.
 
+[Youtube video](https://www.youtube.com/watch?v=mVIH3eejXjk) - baixa qualidade
+
+[Loom video](https://www.loom.com/embed/3c4ce86c7f374cd497bdfa77f42a8a3f) - melhor qualidade
+
+[Figma](https://www.figma.com/file/ARcrzpBMGWEPst8Ag89N4s/Projeto-Sharenergy?node-id=0%3A1&t=yxuO9S6NLQTlkN5y-1) - design
 
 ![img_app](./docs/screenshot.png)
 
