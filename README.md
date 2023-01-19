@@ -1,39 +1,83 @@
-# App Sharenery 
+# Sharenergy 
 
-![img_app](https://lh3.googleusercontent.com/JxJAYZrtBdMwkojKvyAB_qKvMQnjd1Yj3b-vJvaAtq0Ixyr9dbeeEQN9LbdTDirPkFj1wdNQ8AD8wQXi6-hDymkeR5EfxPXsuJ3dcrBFxSrPkxViYGYp_s4TEzbitiLJIvpCDBTREKNZRZbKtemmB1GKG-YfAB5FLz-0__RScpdjOvYbm2ORuEprg4f22r-z96zldS-KRo0feXvtvunVXHLRDDBJzMT415qpeA5nIwZL4rYKvT7oHIpKzJ5ybqCrNO90yCUx6xGs2k1KfywyqV9Qe_os141VyxCNxaj2PkBV2CXGBzGLu-_dW-MRtwhvtWf0LMEXHBOOjmGgzjbVAqctbEvuHvrphEwZVEni_6DfhxEQf9j7aT4XJFN7e4kCggQR-9FOvL3bwFzhuqTy1gV9OrB4pjf6tF94ITEfd7lOZThS5PTmxUnaBJ662hVTFDie1J7SUUmBSe-JEHGYsviTFZ4iLzz00lVX34XI4wpc7EEmhs_rIAYkCOmdslExQliVJ90MMbVsySyvGpKT7WnHOdsr6ThSquCBnkBIIRts8Wd5lEcIbvqTA7XNL723H11PmLqN41JW_xdxW9HoheKBqPJiQq9QolWrP1iNCnegHVQM1Bs3N6GaSVY8JMF2k-5MBuIraJFY0vODyNkG7UeAITOZtkWwLdpaFCLXkBQSjhB1NWRXMvwqAUGPUG_3pzlWKnJ3p1o6RinPj0ZRo3NX1hkualqkJJN8kqAQHnbBCTtBGBf01dJs9KLMA5IbgJqY3XVWkfiOhc2R1rFjK2i32eaRtfjo-pnT7eal_7SX4pBs4pIYBqwpyLTwVo_8CeTa3osDNwStWcnl-QclaL4uJddBakqB38rJVDtI1s9f2SQbwgS_ZbF_Gq_O8iLdnaglvq6pZVcC9up9c3If9a63ytEOlWbfLSPu4E46bLK_fg=w1215-h768-no?authuser=0)
+App Sharenergy foi desenvolvido para o Desafio Sharenergy. O backend da aplicação foi feito em Go, o banco de dados utilizado é o MongoDB, o frontend foi feito em React/Typescript e o style foi feito de maneira responsiva utilizando TailWind.
 
 
-# Descrição
+![img_app](./docs/screenshot.png)
 
-O app Sharenergy foi desenvolvido para o Desafio Sharenergy. O backend da aplicação foi feito em Go, o banco de dados utilizado é o MongoDB, o frontend foi feito em React/Typescript e o style foi feito de maneira responsiva utilizando TailWind.
 
-# Backend - GO
+## Index
 
-- `config`: atalhos para os conteúdos privados da aplicação;
+- [Backend - GO lang](#backend---go)
+- [Frontend - TYPESCRIPT](#frontend---typescript)
+- [Rodando o app](#rodando-a-aplicação)
 
-- `auth`: arquivos de autenticação e token;
+## Backend - GO
 
-- `database`: conexão com o banco de dados MongoDB, queries e mutations da aplicação; 
+Dependências:
 
-- `models`: modelos do banco de dados;
+- `gin` - web framework
+- `dgrijalva/jwt-go` - gerador de tokens jwt
+- `mongo-driver`
 
-- `server`: handlers das queries e mutations
+Pastas:
+- `config/` - atalhos para os conteúdos privados da aplicação;
+
+- `auth/` - arquivos de autenticação e token;
+
+- `database/` - conexão com o banco de dados MongoDB, queries e mutations da aplicação; 
+
+- `models/` - modelos do banco de dados;
+
+- `server/` - handlers das queries e mutations
 Dentro dessa pasta, é possível encontrar o arquivo integration.go, que contém os handlers com endpoints externos;
 
-- `types`: tipos utilizados na aplicação;
+- `types/` - tipos utilizados na aplicação;
 
-- `main.go`: endpoints;
+- `main.go` - endpoints;
 
-# Frontend - TYPESCRIPT
+## Frontend - TYPESCRIPT
 
-- `api`: queries e mutations;
+Dependências:
+- `react`
+- `typescript`
+- `tailwind` - styling
+- `prettier` - formatação
 
-- `assets`: imagens do projeto;
+Pastas:
+- `api/` queries e mutations;
 
-- `components`: tsx components; 
+- `assets/` imagens do projeto;
 
-- `configs`: atalhos para o conteúdo privado da aplicação;
+- `components/` tsx components; 
 
-- `types`: tipos utilizados na aplicação;
+- `configs/` atalhos para o conteúdo privado da aplicação;
 
-- `main.tsx`: Layout e rotas da aplicação;
+- `types/` tipos utilizados na aplicação;
+
+- `main.tsx` Layout e rotas da aplicação;
+
+## Rodando a Aplicação
+
+- Mongo:
+  - Inicie o banco de dados MongoDB
+  - A configuração do backend espera que ele rodecom as seguintes configurações:
+    - Endereço `localhost:27017`;
+    - Usuario `root`, senha `root`;
+    - Crie um banco chamado `sharenergy`.
+  - Se alguma dessas configurações forem diferentes sera necessário alterar `./backend/.env`
+- Backend:
+  - `cd backend`
+  - `go mod tidy` - instala dependências
+  - Configure o arquivo `.env` com os links apropriados, configuração padrão deve funcionar.
+  - `go test ./...` - rode tests
+  - Start:
+    - `go run ./...`
+    - ou com hotreload:
+      - `go install github.com/pilu/fresh@latest`
+      - `fresh`
+- Frontend
+  - `cd frontend/`
+  - `npm i`
+  - `npm start`
+  - `npm run format` - formatação
